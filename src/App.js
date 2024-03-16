@@ -1,6 +1,8 @@
 import { Alchemy, Network } from 'alchemy-sdk';
 import { useEffect, useState } from 'react';
 
+import TransactionList from './components/TransactionList/TransactionList.component';
+
 import './App.css';
 
 // Refer to the README doc for more information about using API
@@ -20,17 +22,25 @@ const settings = {
 const alchemy = new Alchemy(settings);
 
 function App() {
-  const [blockNumber, setBlockNumber] = useState();
+  const [latestBlockNumber, setlatestBlockNumber] = useState(undefined);
 
   useEffect(() => {
     async function getBlockNumber() {
-      setBlockNumber(await alchemy.core.getBlockNumber());
+      const block = await alchemy.core.getBlockNumber();
+      setlatestBlockNumber(block);
     }
 
     getBlockNumber();
   });
 
-  return <div className="App">Block Number: {blockNumber}</div>;
+
+  return (
+          <div className="App">
+            <h2>{ latestBlockNumber ? `Latest Block Number: ${latestBlockNumber}`: 'Loading Latest Block' }</h2>
+            <hr/>
+            <TransactionList alchemy={alchemy} blockNumber={latestBlockNumber} />
+          </div>
+        );
 }
 
 export default App;

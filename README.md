@@ -1,3 +1,7 @@
+## Solution
+[Link to Solution README](SOLUTION.md)
+
+
 # Ethereum Block Explorer
 
 The lessons this week covered the Ethereum JSON-RPC API and the `ethers.js` library giving us the ability to query the Ethereum blockchain and make transactions!
